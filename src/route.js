@@ -91,20 +91,20 @@ angular.module('myApp').config(function($stateProvider, $urlRouterProvider) {
 					controller : 'AccessDeniedController'
 				}
 			}
-		}).state('user-not-found', {
-			url : '/user-not-found',
-			views : {
-				'content@' : {
-					templateUrl : 'src/views/userNotFoundPage.html',
-					controller : 'UserNotFoundController'
-				}
-			}
 		}).state('show-purchases',{
 			url:'/show-purchases',
 			views: {
 				'content@':{
 					templateUrl :'src/views/purchases.html',
 					controller: 'ShowPurchasesController'
+				}
+			}
+		}).state('error',{
+			url:'/error',
+			views: {
+				'content@':{
+					templateUrl :'src/views/errorPage.html',
+					controller: 'ErrorController'
 				}
 			}
 		})

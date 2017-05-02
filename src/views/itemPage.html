@@ -1,22 +1,59 @@
- <div id="PageItems" class="page" style="background-color: wheat">
-        <div style="height:100%; width: 100%; background-color: wheat">
-            <div style="height:9%; width: 100%; border-bottom: 1px solid black" id="itemsHeader">
-                <div style="width:30%; float:left; text-align: center">
-                    <h4 style="padding:6px; margin:0" id="userName"></h4>
-                </div>
-                <div style="width:30%; float:left; text-align: center">
-                    <h4 style="padding:6px; margin:0" id="userBalance"></h4>
-                </div>
-                <div style="width:30%; float:left; text-align: center"><button style="padding:3px; margin-top:6px" id="userPurchases">Check all purchases</button></div>
+<div ng-controller="ShowItemsController as ctrl" id="PageItems" class="page" style="background-color: wheat">
+    <div style="height:100%; width: 100%; background-color: wheat">
+        <div style="height:9%; width: 100%; border-bottom: 1px solid black" id="itemsHeader">
+            <div style="width:30%; float:left; text-align: center">
+                <h4 style="padding:6px; margin:0" ng-model="userName" id="userName"></h4>
             </div>
-            <div style="height:91%; width: 50%; float: left; text-align: center">
-                <h4 style="padding:6px; margin:0">Please choose items: </h4>
-                <div id="items"></div>
+            <div style="width:30%; float:left; text-align: center">
+                <h4 style="padding:6px; margin:0" ng-model="userBalance" id="userBalance"></h4>
             </div>
-            <div style="height:91%; width: 50%; float:left; text-align: center">
-                <h4 style="padding:6px; margin:0">Your order: </h4>
-                <div id="purchase"></div>
-                <button id="btnBuy">Buy</button>
+            <div style="width:30%; float:left; text-align: center"><button style="padding:3px; margin-top:6px" id="userPurchases" ng-click="showPurchases()">Check all purchases</button></div>
+        </div>
+        <div style="height:91%; width: 50%; float: left; text-align: center">
+            <h4 style="padding:6px; margin:0">Please choose items: </h4>
+            <div class="tablecontainer">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>ID.</th>
+                            <th>Name</th>
+                            <th>Price</th>
+                            <th width="20%"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="u in ctrl.items">
+                            <td><span ng-bind="u.itemId"></span></td>
+                            <td><span ng-bind="u.name"></span></td>
+                            <td><span ng-bind="u.price"></span></td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
+        <div style="height:91%; width: 50%; float:left; text-align: center">
+            <h4 style="padding:6px; margin:0">Your order: </h4>
+            <div class="tablecontainer">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>ID.</th>
+                            <th>Name</th>
+                            <th>Price</th>
+                            <th width="20%"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="u in ctrl.choosenItems">
+                            <td><span ng-bind="u.itemId"></span></td>
+                            <td><span ng-bind="u.name"></span></td>
+                            <td><span ng-bind="u.price"></span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <button id="btnBuy" ng-click="buy()">Buy</button>
+            <button id="btnClose" ng-click="close()">Close</button>
+        </div>
     </div>
+</div>
