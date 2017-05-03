@@ -27,15 +27,23 @@ App.controller("HomeController", function ($http, $scope, AuthService, $state) {
                 if (res.body != '') {
                     $scope.message = '';
                     //I should put here $globalScope.user = res.body;
+<<<<<<< HEAD
                     //$globalScope.card = card;
+=======
+                   // $globalScope.card = card;
+>>>>>>> fd564bbbbf1a26ae16dd0c90c8a1068a5405904a
                     $http({
-                        url: 'http://localhost:8081/api/card/user',
+                        url: 'http://localhost:8081/api/card/user/',
                         method: "GET",
                         params: {
                             uid: card //this one I should change
                         }
                     }).success(function (res) {
+<<<<<<< HEAD
                         //$globalScope.user = res.body;
+=======
+                     //   $globalScope.user = res.body;
+>>>>>>> fd564bbbbf1a26ae16dd0c90c8a1068a5405904a
                         $state.go('show-items')
                     }).error(
                         $state.go('error')
