@@ -76,11 +76,6 @@
     <link href="src/bin/keyboard.css" rel="stylesheet" />
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css">
-</head>
-
-<body ng-app="myApp">
-
-    <div ui-view="content"></div>
 
     <script src="src/bin/jq.js"></script>
     <script src="src/bin/jquery-ui.js"></script>
@@ -112,8 +107,11 @@
 </head>
 
 <body ng-app="myApp">
+
    <script> console.log(App)</script>
+
     <div ui-view="content"></div>
+    
     <script>
         $(function () {
             $("input[type='text'],input[type='email']").keyboard();
