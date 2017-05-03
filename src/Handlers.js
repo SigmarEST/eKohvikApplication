@@ -177,6 +177,7 @@ var store = {
     user: {}
 }
 
+/*
 document.getElementById("closeEmailNotFound").onclick = function () {
     UIHandler.changePage("PageWelcome");
 }
@@ -241,3 +242,4 @@ document.getElementById("closeEmailSent").onclick = function () {
     UIHandler.changePage("PageItems")
 }
 
+*/
