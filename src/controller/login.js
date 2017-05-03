@@ -4,7 +4,7 @@ App
 	$scope.login = function() {
 		// requesting the token by usename and passoword
 		$http({
-			url : 'http://localhost:8081/api/station/authenticate',
+			url : 'http://192.168.112.47:8081/api/station/authenticate',
 			method : "POST",
 			params : {
 				username : $scope.username,
