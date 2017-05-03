@@ -107,6 +107,14 @@ angular.module('myApp').config(function($stateProvider, $urlRouterProvider) {
 					controller: 'ErrorController'
 				}
 			}
+		}).state('card-error',{
+			url:'/card-error',
+			views: {
+				'content@':{
+					templateUrl :'src/views/cardErrorPage.html',
+					controller: 'CardErrorController'
+				}
+			}
 		})
 		
 });
