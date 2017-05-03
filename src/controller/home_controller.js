@@ -1,4 +1,4 @@
-App.controller("HomeController", function ($http, $scope, AuthService, $state, $globalScope) {
+App.controller("HomeController", function ($http, $scope, AuthService, $state) {
     $scope.user = AuthService.user;
 
     var NFCP = require('nfc-pcsc');
@@ -27,15 +27,15 @@ App.controller("HomeController", function ($http, $scope, AuthService, $state, $
                 if (res.body != '') {
                     $scope.message = '';
                     //I should put here $globalScope.user = res.body;
-                    $globalScope.card = card;
+                   // $globalScope.card = card;
                     $http({
-                        url: 'http://localhost:8081/api/card/user',
+                        url: 'http://localhost:8081/api/card/user/',
                         method: "GET",
                         params: {
                             uid: card //this one I should change
                         }
                     }).success(function (res) {
-                        $globalScope.user = res.body;
+                     //   $globalScope.user = res.body;
                         $state.go('show-items')
                     }).error(
                         $state.go('error')
