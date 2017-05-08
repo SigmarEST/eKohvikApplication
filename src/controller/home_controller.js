@@ -1,4 +1,4 @@
-App.controller("HomeController", function ($http, $scope, AuthService, $state) {
+App.controller("HomeController", function ($http, $scope, AuthService, $state, $rootScope) {
     $scope.user = AuthService.user;
 
     var NFCP = require('nfc-pcsc');
@@ -10,53 +10,45 @@ App.controller("HomeController", function ($http, $scope, AuthService, $state) {
 
         reader.aid = 'F222222222';
 
-        //NFCHandler.Reader.read(reader)
-
         reader.on('card', card => {
 
             console.log(`${reader.reader.name} xxx card detected`, card);
-            //RESTAdapter.GetCardByUID(card);
 
-            $http({
-                url: 'http://localhost:8081/api/card/station/',
-                method: "GET",
-                params: {
-                    uid:card
-                }
-            }).success(function (res) {
-                if (res.body != '') {
-                    $scope.message = '';
-                    //I should put here $globalScope.user = res.body;
+            $http.get(URL + '/card/station/' + card.uid)
+                .then(
+                function (response) {
+                    if (response.data) {
+                        $rootScope.card = response.data;
+                        $scope.message = '';
+                        $http.get(URL + '/card/user/' + card.uid)
+                            .then(
+                            function (response) {
+                                if (response.data) {
+                                    $rootScope.customer = response.data;
+                                    $state.go('show-items')
+                                }
+                            },
+                            function (errResponse) {
+                                console.log('user retrieving got error')
+                                $state.go('error')
+                            })
+                    } else {
+                        console.log('register')
+                        state.go('register')
+                    }
 
-                    //$globalScope.card = card;
+                },
+                function (errResponse) {
+                    console.error('Error while fetching card');
+                    $state.go('error')
 
-                    $http({
-                        url: 'http://localhost:8081/api/card/user/',
-                        method: "GET",
-                        params: {
-                            uid: card //this one I should change
-                        }
-                    }).success(function (res) {
-
-                     //   $globalScope.user = res.body;
-
-                        $state.go('show-items')
-                    }).error(
-                        $state.go('error')
-                        )
-
-                } else {
-                    $state.go('register')
-                }
-            }).error(function (error) {
-                $state.go('card-error');
-            });
+                });
 
         });
 
         reader.on('error', err => {
             console.log(`${reader.reader.name}  an error occurred`, err);
-            //NFCHandler.Card.error(err);
+            $state.go('card-error')
         });
 
         reader.on('end', () => {
@@ -67,6 +59,8 @@ App.controller("HomeController", function ($http, $scope, AuthService, $state) {
 
     nfc.on('error', err => {
         console.log('an error occurred', err);
+        console.log('nfc reader not found')
+       // $state.go('nfc-reder-not-found')
     });
 
 });
