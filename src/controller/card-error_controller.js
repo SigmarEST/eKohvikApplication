@@ -1,4 +1,4 @@
-App.controller("CardErrorController", function ($http, $scope, AuthService, $state, $globalScope) {
+App.controller("CardErrorController", function ($http, $scope, AuthService, $state, $rootScope) {
     $scope.cancel = function(){
         $state.go('home')
     }
