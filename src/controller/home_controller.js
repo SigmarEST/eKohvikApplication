@@ -60,7 +60,7 @@ App.controller("HomeController", function ($http, $scope, AuthService, $state, $
     nfc.on('error', err => {
         console.log('an error occurred', err);
         console.log('nfc reader not found')
-       // $state.go('nfc-reder-not-found')
+        // $state.go('nfc-reder-not-found')
     });
 
 });

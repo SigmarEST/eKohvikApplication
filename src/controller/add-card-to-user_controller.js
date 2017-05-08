@@ -1,43 +1,52 @@
 App.controller('AddCardToUserController', function ($http, $scope, AuthService, $state) {
-    //$scope.user_email;
-    //$scope.card_name;
 
     $scope.addCardToUser = function () {
-      
-        $http({
-            url: 'http://localhost:8081/api/station/user/email',
-            method: "GET",
-            params: {
-                email: $scope.user_email,
-            }
-        }).success(function (res) {
-            if (res.body != '') {
-                $scope.message = '';
 
-                $http({
-                    url: 'http://localhost:8081/api/card/email',
-                    method: "POST",
-                    params: {
+        $http.get(URL + '/station/user/email' + $scope.user_email)
+            .then(
+            function (response) {
+                if (response.data) {
+
+                    $rootScope.customer = response.data;
+
+                    $scope.message = '';
+
+                    var data = $.param({
+
                         email: $scope.user_email,
                         name: $scope.card_name,
-                        uid: store.card.uid  //this one I should change
-                    }
-                }).success(function (res) {
-                    $state.go('email-sent')
-                }).error(
-                    $state.go('error')
-                )
+                        uid: $rootScope.card.uid
 
-            } else {
+                    })
 
-                $scope.message = 'User not found with procided email !';
-            }
-        }).error(function (error) {
-            $scope.message = 'Authetication Failed !';
-        });
+                    $http.post(URL + '/card/email', data)
+                        .then(
+                        function (response) {
+                            if (response.data) {
+                                $rootScope.customer = response.data;
+                                $state.go('email-sent')
+                                $scope.user_email=''
+                                $scope.card_name=''
+                            }
+                        },
+                        function (errResponse) {
+                            console.log('card adding got error')
+                            $state.go('error')
+                        })
+                } else {
+                    console.log('user not found')
+                    $scope.message = 'User account not found with this email address'
+                }
+
+            },
+            function (errResponse) {
+                 console.log('user retrieving got error')
+                 $state.go('error')
+            });
+
     };
 
-    $scope.cancel = function(){
+    $scope.cancel = function () {
         $state.go('home')
     }
 
