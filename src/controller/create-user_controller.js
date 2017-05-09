@@ -1,8 +1,8 @@
 
 App.controller('CreateUserController', function ($http, $scope, AuthService, $state, $rootScope) {
-    $scope.user_name;
-    $scope.user_email;
-    $scope.user_card_name;
+    //$scope.user_name;
+    //$scope.user_email;
+    //$scope.user_card_name;
 
     $scope.createUser = function () {
         var data = {
@@ -26,16 +26,13 @@ App.controller('CreateUserController', function ($http, $scope, AuthService, $st
 
                     }
 
-                    $http.post(URL + '/card/email', data)
+                    $http.post(URL + '/card/email/'+$scope.user_email, data)
                         .then(
                         function (response) {
-                            if (response.data) {
-                                $rootScope.customer = response.data;
                                 $state.go('email-sent')
                                 $scope.user_email='';
                                 $scope.card_name='';
                                 $scope.user_name='';
-                            }
                         },
                         function (errResponse) {
                             console.log('card adding got error')
@@ -44,7 +41,8 @@ App.controller('CreateUserController', function ($http, $scope, AuthService, $st
 
                 } else {
                     console.log('returned null')
-                    state.go('error')
+                    $scope.message="Email address is already attached to user account"
+                    //$state.go('error')
                 }
 
             },

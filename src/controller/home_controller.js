@@ -13,12 +13,13 @@ App.controller("HomeController", function ($http, $scope, AuthService, $state, $
         reader.on('card', card => {
 
             console.log(`${reader.reader.name} xxx card detected`, card);
+             $rootScope.card = card;
 
             $http.get(URL + '/card/station/' + card.uid)
                 .then(
                 function (response) {
                     if (response.data) {
-                        $rootScope.card = response.data;
+                       // $rootScope.card = response.data;
                         $scope.message = '';
                         $http.get(URL + '/card/user/' + card.uid)
                             .then(
@@ -33,8 +34,9 @@ App.controller("HomeController", function ($http, $scope, AuthService, $state, $
                                 $state.go('error')
                             })
                     } else {
+                        //$rootScope.card = card.uid;
                         console.log('register')
-                        state.go('register')
+                        $state.go('register')
                     }
 
                 },

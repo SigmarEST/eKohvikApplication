@@ -1,4 +1,4 @@
-App.controller('RegisterController', function($http, $scope, AuthService) {
+App.controller('RegisterController', function($http, $scope, AuthService, $state) {
     $scope.createUser = function(){
         $state.go('create-user')
     }
