@@ -1,3 +1,0 @@
-App.service('CardService', function(){
-    
-})
