@@ -1,36 +1,35 @@
-App.controller('AddCardToUserController', function ($http, $scope, AuthService, $state) {
+App.controller('AddCardToUserController', function ($http, $scope, AuthService, $state, $rootScope) {
 
     $scope.addCardToUser = function () {
 
-        $http.get(URL + '/station/user/email' + $scope.user_email)
+        $http.get(URL + '/user/station/email/' + $scope.user_email_to_search)
             .then(
             function (response) {
                 if (response.data) {
 
                     $rootScope.customer = response.data;
+                    $rootScope.user_email = $scope.user_email_to_search;
 
                     $scope.message = '';
 
-                    var data = $.param({
+                    var data = {
 
-                        email: $scope.user_email,
+                        email: $scope.user_email_to_search,
                         name: $scope.card_name,
                         uid: $rootScope.card.uid
 
-                    })
+                    }
 
-                    $http.post(URL + '/card/email', data)
+                    $http.post(URL + '/card/email/'+ $scope.user_email_to_search, data)
                         .then(
                         function (response) {
-                            if (response.data) {
-                                $rootScope.customer = response.data;
                                 $state.go('email-sent')
-                                $scope.user_email=''
+                                $scope.user_email_to_search=''
                                 $scope.card_name=''
-                            }
                         },
                         function (errResponse) {
                             console.log('card adding got error')
+                            $rootScope.errorMessage = "Card creation got error"
                             $state.go('error')
                         })
                 } else {
@@ -41,6 +40,7 @@ App.controller('AddCardToUserController', function ($http, $scope, AuthService, 
             },
             function (errResponse) {
                  console.log('user retrieving got error')
+                 $rootScope.errorMessage = "Fetching user got error"
                  $state.go('error')
             });
 

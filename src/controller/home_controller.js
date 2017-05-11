@@ -11,6 +11,10 @@ App.controller("HomeController", function ($http, $scope, AuthService, $state, $
         reader.aid = 'F222222222';
 
         reader.on('card', card => {
+            $rootScope.customer = null;
+            $rootScope.card = null;
+            $rootScope.user_email = null;
+            $rootScope.errorMessage = null;
 
             console.log(`${reader.reader.name} xxx card detected`, card);
              $rootScope.card = card;
@@ -31,6 +35,7 @@ App.controller("HomeController", function ($http, $scope, AuthService, $state, $
                             },
                             function (errResponse) {
                                 console.log('user retrieving got error')
+                                $rootScope.errorMessage = "User account fetching got error"
                                 $state.go('error')
                             })
                     } else {
@@ -42,6 +47,7 @@ App.controller("HomeController", function ($http, $scope, AuthService, $state, $
                 },
                 function (errResponse) {
                     console.error('Error while fetching card');
+                    $rootScope.errorMessage = "Card fetching got error"
                     $state.go('error')
 
                 });

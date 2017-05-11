@@ -15,6 +15,7 @@ App.controller('CreateUserController', function ($http, $scope, AuthService, $st
             function (response) {
                 if (response.data) {
                     $rootScope.customer = response.data;
+                    $rootScope.user_email = $scope.user_email;
 
                     $scope.message = '';
 
@@ -36,6 +37,7 @@ App.controller('CreateUserController', function ($http, $scope, AuthService, $st
                         },
                         function (errResponse) {
                             console.log('card adding got error')
+                            $rootScope.errorMessage = "Card creation got error"
                             $state.go('error')
                         })
 
@@ -48,6 +50,7 @@ App.controller('CreateUserController', function ($http, $scope, AuthService, $st
             },
             function (errResponse) {
                  console.log('user creation got error')
+                 $rootScope.errorMessage = "User account creation got error"
                  $state.go('error')
             });
     }

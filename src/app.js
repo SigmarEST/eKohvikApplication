@@ -1,7 +1,6 @@
 'use strict';
 
-var URL = 'http://localhost:8081/api'
-
+var URL = 'http://10.10.2.172:8081/api'
 var App = angular.module('myApp', ['ui.router'])
 
 	// the following method will run at the time of initializing the module. That

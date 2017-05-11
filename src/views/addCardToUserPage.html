@@ -3,18 +3,19 @@
         <h1 style="display: table-cell; vertical-align: middle; color:burlywood; font-size: 28px">Please enter your email and click the button</h1>
     </div>
     <div style="height:80%; width: 100%; text-align: center; display:table">
-        <form style="width:400px; height:200px">
+        <form style="width:400px; height:200px" name="addCardToUserForm">
+            <div class="form-group" ng-class="{'has-error':addCardToUserForm.user_email_to_search.$invalid && addCardToUserForm.user_email_to_search.$dirty}">
             <label for="user_email_to_search"> Email: </label>
-            <input type="email" ng-model="user_email" id="user_email_to_search" placeholder="Your email ..." required/>
+            <input type="email" ng-model="user_email_to_search" id="user_email_to_search" placeholder="Your email ..." required/>
             <span ng-show="myForm.myAddress.$error.email">Not a valid e-mail address</span>
-            <br>
-            <br>
+            </div>
+            <div class="form-group" ng-class="{'has-error':addCardToUserForm.card_name.$invalid && addCardToUserForm.card_name.$dirty}">
             <label for="card_name"> Card Name: </label>
             <input type="text" ng-model = "card_name" id="card_name" placeholder="Give your card name ..." required/>
+            </div>
+            <input class="btn btn-success" style="float:left; width:170px" type="button" id="btnAddCardToUser" ng-disabled="addCardToUserForm.$invalid" value="Add to user" ng-click="addCardToUser()"/>
+            <input class="btn btn-default" style="float:left; width:170px" type="button" width:200px id="cancelAddCardToUser" value="Cancel" ng-click="cancel()"/>
             <br>
-            <br>
-            <input type="button" id="btnAddCardToUser" , , value="Add to user" ng-click="addCardToUser()"/>
-            <input type="button" width:200px id="cancelAddCardToUser" value="Cancel" ng-click="cancel()"/>
             <div class="alert alert-info margin-top-5" ng-show="message">{{message}}</div>
         </form>
     </div>

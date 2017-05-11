@@ -17,7 +17,7 @@
                 <label for="user_card_name"> Card Name: </label>
                 <input type="text" ng-model="user_card_name" id="user_card_name" placeholder="Card name ..." required/>
                 </div>
-                <input type="button" class="btn btn-success" style="float:left; width:170px"  value="Create User" ng-disabled="createUser.$invalid" ng-click = "createUser()"/>
+                <input type="button" class="btn btn-success" style="float:left; width:170px"  value="Create User" ng-disabled="createUserForm.$invalid" ng-click = "createUser()"/>
                 <input type="button" class="btn btn-default" style="float: left; width:170px" value="Cancel" ng-click = "cancel()" />
                 <br>
                 <div class="alert alert-info margin-top-5" ng-show="message">{{message}}</div>

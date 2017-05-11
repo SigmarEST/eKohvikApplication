@@ -1,18 +1,19 @@
-App.controller('ShowItemsController', function ($http, $scope, AuthService, $state) {
-
-    $scope.userName;
-    $scope.userBalance;
-    $scope.items;
+App.controller('ShowItemsController', function ($http, $scope, AuthService, $state, $rootScope) {
+    
+    $scope.userName = $rootScope.customer.name;
+    $scope.userBalance = $rootScope.customer.balance;
     $scope.choosenItem;
 
-    $scope.showItems = function () {
+    var init = function() {
 
         $http.get(URL + '/item/items/')
             .then(
             function (response) {
                 if (response.data) {
                     $scope.message = '';
-                    $scope.items = JSON.parse(response.data)
+                    console.log(response.data)
+                    $scope.items = response.data;
+                    
 
                 } else {
                     console.log('no items')
@@ -22,13 +23,16 @@ App.controller('ShowItemsController', function ($http, $scope, AuthService, $sta
             },
             function (errResponse) {
                 console.log('item retrieving got error')
+                $rootScope.errorMessage = "Item retrieving got error"
                 $state.go('error')
             });
 
     }
+    
 
     $scope.buy = function () {
 
     }
+    init();
 
 });
