@@ -1,3 +1,3 @@
-App.controller('ErrorController', function ($http, $scope, AuthService, $rootScope) {
-    $scope.message = $rootScope.errorMessage;
+App.controller('ErrorController', function ($http, $scope, AuthService, CardService, $rootScope) {
+    $scope.message = CardService.data.errorMessage;
 })

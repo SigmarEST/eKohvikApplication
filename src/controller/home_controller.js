@@ -1,9 +1,11 @@
-App.controller("HomeController", function ($http, $scope, AuthService, $state, $rootScope) {
-    $scope.user = AuthService.user;
-
+App.controller("HomeController", function ($http, $scope, AuthService, $timeout, CardService, $state, $rootScope) {
+    //const pcsclite = require('pcsclite')
     var NFCP = require('nfc-pcsc');
     const nfc = new NFCP.default();
+    //nfc.pcsc.on();
 
+    console.log(nfc)        
+    //console.log(pcsclite)
     nfc.on('reader', reader => {
 
         console.log(`${reader.reader.name}  device attached`);
@@ -11,43 +13,48 @@ App.controller("HomeController", function ($http, $scope, AuthService, $state, $
         reader.aid = 'F222222222';
 
         reader.on('card', card => {
-            $rootScope.customer = null;
-            $rootScope.card = null;
-            $rootScope.user_email = null;
-            $rootScope.errorMessage = null;
 
             console.log(`${reader.reader.name} xxx card detected`, card);
-             $rootScope.card = card;
+            
+            CardService.data.card = card;
 
             $http.get(URL + '/card/station/' + card.uid)
                 .then(
                 function (response) {
                     if (response.data) {
-                       // $rootScope.card = response.data;
+                        // $rootScope.card = response.data;
                         $scope.message = '';
                         $http.get(URL + '/card/user/' + card.uid)
                             .then(
                             function (response) {
                                 if (response.data) {
-                                    $rootScope.customer = response.data;
+
+                                    CardService.data.customer = response.data;
+                                    console.log(reader)
+                                    reader._events.end();
                                     $state.go('show-items')
                                 }
                             },
                             function (errResponse) {
+                                nfc.pcsc.close();
                                 console.log('user retrieving got error')
-                                $rootScope.errorMessage = "User account fetching got error"
+                                CardService.data.errorMessage = "User account fetching got error";
                                 $state.go('error')
                             })
                     } else {
                         //$rootScope.card = card.uid;
+                       nfc.pcsc.removeAllListeners()
                         console.log('register')
                         $state.go('register')
                     }
 
                 },
                 function (errResponse) {
+                   nfc.pcsc.removeAllListeners()
                     console.error('Error while fetching card');
-                    $rootScope.errorMessage = "Card fetching got error"
+
+                    CardService.data.errorMessage = "Card fetching got error";
+                    
                     $state.go('error')
 
                 });
@@ -56,6 +63,7 @@ App.controller("HomeController", function ($http, $scope, AuthService, $state, $
 
         reader.on('error', err => {
             console.log(`${reader.reader.name}  an error occurred`, err);
+            nfc.pcsc.removeAllListeners()
             $state.go('card-error')
         });
 

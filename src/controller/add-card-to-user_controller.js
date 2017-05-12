@@ -1,4 +1,4 @@
-App.controller('AddCardToUserController', function ($http, $scope, AuthService, $state, $rootScope) {
+App.controller('AddCardToUserController', function ($http, $scope, AuthService, $timeout, CardService, $state, $rootScope) {
 
     $scope.addCardToUser = function () {
 
@@ -6,9 +6,8 @@ App.controller('AddCardToUserController', function ($http, $scope, AuthService, 
             .then(
             function (response) {
                 if (response.data) {
-
-                    $rootScope.customer = response.data;
-                    $rootScope.user_email = $scope.user_email_to_search;
+                        CardService.data.customer = response.data;
+                        CardService.data.user_email = $scope.user_email_to_search;
 
                     $scope.message = '';
 
@@ -16,20 +15,20 @@ App.controller('AddCardToUserController', function ($http, $scope, AuthService, 
 
                         email: $scope.user_email_to_search,
                         name: $scope.card_name,
-                        uid: $rootScope.card.uid
+                        uid: CardService.data.card.uid
 
                     }
 
-                    $http.post(URL + '/card/email/'+ $scope.user_email_to_search, data)
+                    $http.post(URL + '/card/email/' + $scope.user_email_to_search, data)
                         .then(
                         function (response) {
-                                $state.go('email-sent')
-                                $scope.user_email_to_search=''
-                                $scope.card_name=''
+                            $state.go('email-sent')
+                            $scope.user_email_to_search = ''
+                            $scope.card_name = ''
                         },
                         function (errResponse) {
                             console.log('card adding got error')
-                            $rootScope.errorMessage = "Card creation got error"
+                            CardService.data.errorMessage = "Card creation got error";
                             $state.go('error')
                         })
                 } else {
@@ -39,9 +38,11 @@ App.controller('AddCardToUserController', function ($http, $scope, AuthService, 
 
             },
             function (errResponse) {
-                 console.log('user retrieving got error')
-                 $rootScope.errorMessage = "Fetching user got error"
-                 $state.go('error')
+                console.log('user retrieving got error')
+                
+                CardService.data.errorMessage = "Fetching user got error"
+                           
+                $state.go('error')
             });
 
     };
