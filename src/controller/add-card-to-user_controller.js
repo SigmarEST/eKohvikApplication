@@ -7,7 +7,7 @@ App.controller('AddCardToUserController', function ($http, $scope, AuthService, 
             function (response) {
                 if (response.data) {
                         CardService.data.customer = response.data;
-                        CardService.data.user_email = $scope.user_email_to_search;
+                        //CardService.data.user_email = $scope.user_email_to_search;
 
                     $scope.message = '';
 

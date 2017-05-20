@@ -16,7 +16,7 @@ App.controller('CreateUserController', function ($http, $scope, AuthService, Car
                 if (response.data) {
 
                         CardService.data.customer = response.data;
-                        CardService.data.user_email = $scope.user_email;
+                        //CardService.data.user_email = $scope.user_email;
                     
                     $scope.message = '';
 

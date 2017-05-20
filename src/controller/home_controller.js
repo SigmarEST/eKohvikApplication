@@ -17,6 +17,9 @@ App.controller("HomeController", function ($http, $scope, AuthService, $timeout,
             console.log(`${reader.reader.name} xxx card detected`, card);
             
             CardService.data.card = card;
+            CardService.data.selectedItems=[];
+            CardService.data.errorMessage = null;
+            CardService.data.totalPrice = 0.00;
 
             $http.get(URL + '/card/station/' + card.uid)
                 .then(
@@ -28,29 +31,39 @@ App.controller("HomeController", function ($http, $scope, AuthService, $timeout,
                             .then(
                             function (response) {
                                 if (response.data) {
-
+                                    //$scope.$apply();
                                     CardService.data.customer = response.data;
-                                    console.log(reader)
-                                    reader._events.end();
-                                    $state.go('show-items')
+                                    //$scope.$apply();
+                                   // console.log(reader)
+                                    //reader._events.end();
+                                    console.log("I am here")
+                                    console.log()
+                                    if($state.current.name == 'show-items' ){
+                                         $state.reload();
+                                    }
+                                    else{
+                                         $state.go('show-items')
+                                    }
+                                   
+                                   
                                 }
                             },
                             function (errResponse) {
-                                nfc.pcsc.close();
+                                //nfc.pcsc.close();
                                 console.log('user retrieving got error')
                                 CardService.data.errorMessage = "User account fetching got error";
                                 $state.go('error')
                             })
                     } else {
                         //$rootScope.card = card.uid;
-                       nfc.pcsc.removeAllListeners()
+                       //nfc.pcsc.removeAllListeners()
                         console.log('register')
                         $state.go('register')
                     }
 
                 },
                 function (errResponse) {
-                   nfc.pcsc.removeAllListeners()
+                   //nfc.pcsc.removeAllListeners()
                     console.error('Error while fetching card');
 
                     CardService.data.errorMessage = "Card fetching got error";
@@ -63,7 +76,7 @@ App.controller("HomeController", function ($http, $scope, AuthService, $timeout,
 
         reader.on('error', err => {
             console.log(`${reader.reader.name}  an error occurred`, err);
-            nfc.pcsc.removeAllListeners()
+            //nfc.pcsc.removeAllListeners()
             $state.go('card-error')
         });
 

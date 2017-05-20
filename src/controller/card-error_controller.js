@@ -1,5 +1,10 @@
 App.controller("CardErrorController", function ($http, $scope, AuthService, $state, $rootScope) {
-    $scope.cancel = function(){
+
+    setTimeout(function () {
+
         $state.go('home')
-    }
+
+    }, 1500)
+
+
 })

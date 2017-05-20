@@ -4,9 +4,10 @@ App
     var data = {
         customer : null,
         card : null,
-        user_email : null,
+        //user_email : null,
         errorMessage : null,
-        card : null
+        selectedItems:[],
+        totalPrice:0.00
 
     }
 

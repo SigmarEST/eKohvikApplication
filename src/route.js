@@ -1,11 +1,11 @@
-App.config(function($stateProvider, $urlRouterProvider) {
+App.config(function($stateProvider) {
 			
 		// the ui router will redirect if a invalid state has come.
-		$urlRouterProvider.otherwise('/page-not-found');
+		//$urlRouterProvider.otherwise('/page-not-found');
 		
 
 		$stateProvider.state('login', {
-			url : '/login',
+			//url : '/login',
 			views : {
 				'content@' : {
 					templateUrl : 'src/views/login.html',
@@ -113,6 +113,14 @@ App.config(function($stateProvider, $urlRouterProvider) {
 				'content@':{
 					templateUrl :'src/views/cardErrorPage.html',
 					controller: 'CardErrorController'
+				}
+			}
+		}).state('purchase-created',{
+			url:'/purchase-created',
+			views: {
+				'content@':{
+					templateUrl :'src/views/purchase-created.html',
+					controller: 'PurchaseCreatedController'
 				}
 			}
 		})
