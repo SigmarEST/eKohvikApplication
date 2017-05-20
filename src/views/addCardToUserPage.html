@@ -6,12 +6,12 @@
         <form style="width:400px; height:200px" name="addCardToUserForm">
             <div class="form-group" ng-class="{'has-error':addCardToUserForm.user_email_to_search.$invalid && addCardToUserForm.user_email_to_search.$dirty}">
             <label for="user_email_to_search"> Email: </label>
-            <input type="email" ng-model="user_email_to_search" id="user_email_to_search" placeholder="Your email ..." required/>
+            <input type="email" ng-model="user_email_to_search" ng-virtual-keyboard placeholder="Your email ..." required/>
             <span ng-show="myForm.myAddress.$error.email">Not a valid e-mail address</span>
             </div>
             <div class="form-group" ng-class="{'has-error':addCardToUserForm.card_name.$invalid && addCardToUserForm.card_name.$dirty}">
             <label for="card_name"> Card Name: </label>
-            <input type="text" ng-model = "card_name" id="card_name" placeholder="Give your card name ..." required/>
+            <input type="text" ng-model = "card_name" id="card_name" ng-virtual-keyboard placeholder="Give your card name ..." required/>
             </div>
             <input class="btn btn-success" style="float:left; width:170px" type="button" id="btnAddCardToUser" ng-disabled="addCardToUserForm.$invalid" value="Add to user" ng-click="addCardToUser()"/>
             <input class="btn btn-default" style="float:left; width:170px" type="button" width:200px id="cancelAddCardToUser" value="Cancel" ng-click="cancel()"/>

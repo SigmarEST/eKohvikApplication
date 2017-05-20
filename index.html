@@ -74,8 +74,8 @@
         }
     </style>
     
-    <link href="src/bin/jquery-ui.css" rel="stylesheet" />
-    <link href="src/bin/keyboard.css" rel="stylesheet" />
+    <link href="src/keyboard/angular-virtual-keyboard.css" rel="stylesheet">
+    
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css">
 
 </head>
@@ -84,12 +84,12 @@
 
     <div ui-view="content"></div>
 
-    <script src="src/bin/jq.js"></script>
-    <script src="src/bin/jquery-ui.js"></script>
-    <script src="src/bin/keyboard.js"></script>
-    
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.js"></script>
+     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.3.2/angular-ui-router.js"></script>
+
+    <script src="src/keyboard/angular-virtual-keyboard.js"></script>
+    
+   
 
 	<script type="text/javascript" src="src/app.js"></script>
 	<script type="text/javascript" src="src/route.js"></script>
@@ -113,11 +113,7 @@
     <script type = "text/javascript" src="src/controller/card-error_controller.js"></script>
     <script type = "text/javascript" src="src/controller/purchase-created_controller.js"></script>
     
-    <script>
-        $(function () {
-            $("input[type='text'],input[type='email']").keyboard();
-        })
-    </script>
+
 
 </body>
 

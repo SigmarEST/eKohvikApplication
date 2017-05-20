@@ -6,16 +6,16 @@
             <form style="width:400px; height:200px; float: center; text-align: center;" name="createUserForm">
                 <div class="form-group" ng-class="{'has-error':createUserForm.user_name.$invalid && createUserForm.user_name.$dirty}">
                 <label for="user_name"> Name : </label>
-                <input type="text" ng-model="user_name" id="user_name" placeholder="Your name..." required/>
+                <input type="text" ng-model="user_name" id="user_name" ng-virtual-keyboard placeholder="Your name..." required/>
                 </div>
                 <div class="form-group" ng-class="{'has-error':createUserForm.user_email.$invalid && createUserForm.user_email.$dirty}">
                 <label for="user_email"> Email : </label>
-                <input type="email" ng-model="user_email" id="user_email" placeholder="Your email..." required/>
+                <input type="email" ng-model="user_email" id="user_email" ng-virtual-keyboard placeholder="Your email..." required/>
                 <span ng-show="createUserForm.user_email.$error.email">Not a valid e-mail address</span>
                 </div>
                 <div class="form-group" ng-class="{'has-error':createUserForm.user_card_name.$invalid && createUserForm.user_card_name.$dirty}">
                 <label for="user_card_name"> Card Name: </label>
-                <input type="text" ng-model="user_card_name" id="user_card_name" placeholder="Card name ..." required/>
+                <input type="text" ng-model="user_card_name" id="user_card_name" ng-virtual-keyboard placeholder="Card name ..." required/>
                 </div>
                 <input type="button" class="btn btn-success" style="float:left; width:170px"  value="Create User" ng-disabled="createUserForm.$invalid" ng-click = "createUser()"/>
                 <input type="button" class="btn btn-default" style="float: left; width:170px" value="Cancel" ng-click = "cancel()" />

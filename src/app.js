@@ -1,7 +1,7 @@
 'use strict';
 
 var URL = 'http://10.224.7.182:8081/api'
-var App = angular.module('myApp', ['ui.router'])
+var App = angular.module('myApp', ['ui.router', 'angular-virtual-keyboard'])
 
 	// the following method will run at the time of initializing the module. That
 	// means it will run only one time.
