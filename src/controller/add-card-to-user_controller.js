@@ -1,6 +1,8 @@
+
 App.controller('AddCardToUserController', function ($http, $scope, AuthService, $timeout, CardService, $state, $rootScope) {
 
     $scope.addCardToUser = function () {
+
 
         $http.get(URL + '/user/station/email/' + $scope.user_email_to_search)
             .then(

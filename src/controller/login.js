@@ -1,5 +1,6 @@
-App
-.controller('LoginController', function($http, $scope, $state, AuthService, $rootScope) {
+
+var sha512 =  require('js-sha512').sha512;
+App.controller('LoginController', function($http, $scope, $state, AuthService, $rootScope) {
 	// method for login
 	$scope.login = function() {
 		// requesting the token by usename and passoword
@@ -8,7 +9,7 @@ App
 			method : "POST",
 			params : {
 				username : $scope.username,
-				password : $scope.password
+				password : sha512($scope.password)
 			}
 		}).success(function(res) {
 			$scope.password = null;

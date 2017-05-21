@@ -1,3 +1,5 @@
+var sha512 =  require('js-sha512').sha512;
+
 App.controller("HomeController", function ($http, $scope, AuthService, $timeout, CardService, $state, $rootScope) {
     //const pcsclite = require('pcsclite')
     var NFCP = require('nfc-pcsc');
@@ -17,27 +19,26 @@ App.controller("HomeController", function ($http, $scope, AuthService, $timeout,
             console.log(`${reader.reader.name} xxx card detected`, card);
             
             CardService.data.card = card;
+            CardService.data.card.uid = sha512(card.uid);
+            //console.log( CardService.data.card.uid)
+            //console.log(CardService.data.card)
             CardService.data.selectedItems=[];
-            CardService.data.errorMessage = null;
+            CardService.data.errorMessage = '';
             CardService.data.totalPrice = 0.00;
 
-            $http.get(URL + '/card/station/' + card.uid)
+            $http.get(URL + '/card/station/' + CardService.data.card.uid)
                 .then(
                 function (response) {
                     if (response.data) {
                         // $rootScope.card = response.data;
                         $scope.message = '';
-                        $http.get(URL + '/card/user/' + card.uid)
+                        $http.get(URL + '/card/user/' + CardService.data.card.uid)
                             .then(
                             function (response) {
                                 if (response.data) {
-                                    //$scope.$apply();
+                                   
                                     CardService.data.customer = response.data;
-                                    //$scope.$apply();
-                                   // console.log(reader)
-                                    //reader._events.end();
-                                    console.log("I am here")
-                                    console.log()
+                                   
                                     if($state.current.name == 'show-items' ){
                                          $state.reload();
                                     }
