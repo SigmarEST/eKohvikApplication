@@ -1,6 +1,6 @@
 'use strict';
 
-var URL = 'http://10.10.1.172:8081/api'
+var URL = 'http://10.224.14.123:8081/api'
 var App = angular.module('myApp', ['ui.router', 'angular-virtual-keyboard'])
 
 	// the following method will run at the time of initializing the module. That
