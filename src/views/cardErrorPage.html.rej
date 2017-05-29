@@ -1,0 +1,7 @@
+diff a/src/views/cardErrorPage.html b/src/views/cardErrorPage.html	(rejected hunks)
+@@ -1,4 +0,4 @@
+-<div id="PageError" class="page">
++<div ng-controller="CardErrorController" id="PageError" class="page">
+     <div style="height:100%; width: 100%; display: table; text-align: center; background-color: wheat">
+         <h1 style="display: table-cell; vertical-align: middle; color:burlywood; font-size: 32px">Card is not supported</h1>
+     </div>

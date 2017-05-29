@@ -1,0 +1,7 @@
+diff a/src/route.js b/src/route.js	(rejected hunks)
+@@ -1,4 +0,4 @@
+-angular.module('myApp').config(function($stateProvider, $urlRouterProvider) {
++App.config(function($stateProvider, $urlRouterProvider) {
+ 			
+ 		// the ui router will redirect if a invalid state has come.
+ 		$urlRouterProvider.otherwise('/page-not-found');

@@ -1,0 +1,37 @@
+<div ng-controller="ShowItemsController as ctrl" id="PageItems" class="page" style="background-color: wheat">
+    <div style="height:10vh; width: 100%; border-bottom: 1px solid black; position: fixed; background-color: wheat; display:inline-block"
+        id="itemsHeader">
+        <div style="width:30%; float:left; text-align: center">
+            <h4 style="padding:6px; margin:0" ng-model="userName" id="userName">{{userName}}</h4>
+        </div>
+        <div style="width:30%; float:left; text-align: center">
+            <h4 style="padding:6px; margin:0" ng-model="userBalance" id="userBalance">{{(userBalance).toFixed(2)}}</h4>
+        </div>
+        <div style="width:40%; float:left; text-align: right; padding-top:5px">
+        <input type="button" class="btn btn-default"  style="width: 180px" ng-click="Cancel()" value="Close">
+        </div>
+    </div>
+    <div style="height:80vh; margin-top: 10vh; width: 100%; text-align: left; display: inline-block">
+            <div class="tablecontainer">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th style="text-align: center">ID</th>
+                            <th style="text-align: center">Items</th>
+                            <th style="text-align: center">Price</th>
+                            <th style="text-align: center">Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        <tr ng-repeat="u in purchases">
+                            <td><span>{{u.purchaseId}}</span></td>
+                            <td><div ng-repeat="item in u.items">{{item.name}}</div></td>
+                            <td><span>{{(u.cost).toFixed(2)}}</span></td>
+                            <td><span>{{u.dateTime | date: 'yyyy-MM-dd HH-mm'}}</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+</div>

@@ -1,0 +1,16 @@
+ <div ng-controller="RegisterController" id="PageUser" class="page" style="background-color:burlywood">
+        <div style="height:20%; width: 100%; text-align: center; display:table">
+            <h1 style="display: table-cell; vertical-align: middle; color:wheat; font-size: 28px">Card is not registered in the system</h1>
+        </div>
+        <div style="height:80%; width: 100%; text-align: center; display:table">
+            <button id="btnCreateUser" class="entry" ng-click = 'createUser()'>
+                Create New User
+             </button>
+            <button id="btnAddCardToExistingUser" class="entry" ng-click='addCardToUser()'>
+                Add this card to existing user
+            </button>
+            <button id="btnCancel" class="entry"  ng-click="cancel()">
+                Cancel
+            </button>
+        </div>
+    </div>
