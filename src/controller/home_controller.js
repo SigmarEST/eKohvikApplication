@@ -1,13 +1,10 @@
 var sha512 =  require('js-sha512').sha512;
 
 App.controller("HomeController", function ($http, $scope, AuthService, $timeout, CardService, $state, $rootScope) {
-    //const pcsclite = require('pcsclite')
     var NFCP = require('nfc-pcsc');
-    const nfc = new NFCP.default();
-    //nfc.pcsc.on();
+    const nfc = new NFCP.NFC
 
-    console.log(nfc)        
-    //console.log(pcsclite)
+    console.log(nfc)
     nfc.on('reader', reader => {
 
         console.log(`${reader.reader.name}  device attached`);
@@ -36,17 +33,14 @@ App.controller("HomeController", function ($http, $scope, AuthService, $timeout,
                             .then(
                             function (response) {
                                 if (response.data) {
-                                   
                                     CardService.data.customer = response.data;
                                    
-                                    if($state.current.name == 'show-items' ){
+                                    if($state.current.name == 'automatic-coffee'){
                                          $state.reload();
                                     }
                                     else{
-                                         $state.go('show-items')
+                                         $state.go('automatic-coffee')
                                     }
-                                   
-                                   
                                 }
                             },
                             function (errResponse) {
@@ -76,9 +70,10 @@ App.controller("HomeController", function ($http, $scope, AuthService, $timeout,
         });
 
         reader.on('error', err => {
-            console.log(`${reader.reader.name}  an error occurred`, err);
-            //nfc.pcsc.removeAllListeners()
-            $state.go('card-error')
+            if (!reader.reader.name.startsWith('Windows')) {
+                console.log(`${reader.reader.name}  an error occurred`, err);
+                $state.go('card-error')
+            }
         });
 
         reader.on('end', () => {

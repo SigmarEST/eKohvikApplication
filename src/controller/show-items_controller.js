@@ -16,18 +16,7 @@ App.controller('ShowItemsController', function ($http, $scope, AuthService, Card
             .then(
             function (response) {
                 if (response.data) {
-                    //$scope.message = '';
-                    //console.log(response.data)
-                    // setTimeout(function(){
-
-                    //$scope.$apply(function($scope){
                     $scope.items = response.data;
-                    //  console.info(`items`,$scope.items)
-                    // })
-                    // },100)
-
-
-
                 } else {
                     console.log('no items')
                     $scope.message = 'There is no available item !';

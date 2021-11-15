@@ -4,8 +4,9 @@ App.controller('LoginController', function($http, $scope, $state, AuthService, $
 	// method for login
 	$scope.login = function() {
 		// requesting the token by usename and passoword
+		console.log("test")
 		$http({
-			url : URL+'/station/authenticate',
+			url : 'http://localhost:8081/api/station/authenticate',
 			method : "POST",
 			params : {
 				username : $scope.username,

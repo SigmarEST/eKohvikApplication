@@ -1,6 +1,6 @@
 'use strict';
 
-var URL = 'http://10.224.14.123:8081/api'
+var URL = 'http://localhost:8081/api'
 var App = angular.module('myApp', ['ui.router', 'angular-virtual-keyboard'])
 
 	// the following method will run at the time of initializing the module. That
@@ -11,7 +11,7 @@ var App = angular.module('myApp', ['ui.router', 'angular-virtual-keyboard'])
 		// the '$stateChangeStart'.
 		$rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
 			// checking the user is logged in or not
-			console.log("hello")
+
 			if (!AuthService.user) {
 				// To avoiding the infinite looping of state change we have to add a
 				// if condition.
