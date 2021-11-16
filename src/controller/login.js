@@ -1,10 +1,8 @@
 
 var sha512 =  require('js-sha512').sha512;
 App.controller('LoginController', function($http, $scope, $state, AuthService, $rootScope) {
-	// method for login
+
 	$scope.login = function() {
-		// requesting the token by usename and passoword
-		console.log("test")
 		$http({
 			url : 'http://localhost:8081/api/station/authenticate',
 			method : "POST",

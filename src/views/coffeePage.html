@@ -1,4 +1,4 @@
-<div ng-controller="ShowItemsController as ctrl" id="PageItems" class="page" style="background-color: wheat">
+<div ng-controller="AutomaticCoffeeController" id="PageItems" class="page" style="background-color: wheat">
     <div style="height:10vh; width: 100%; border-bottom: 1px solid black; position: fixed; background-color: wheat; display:inline-block"
          id="itemsHeader">
         <div style="width:30%; float:left; text-align: center">
@@ -33,16 +33,22 @@
             <h4></h4>
             <h4 style="padding:6px; margin:0">Order Status:</h4>
             <div class="tablecontainer">
-                Nothing
+                '
+                <div class="loader"></div>
+                <h4>{{loaderMessage}}</h4>
             </div>
         </div>
     </div>
     <div style="height:10vh;  width: 100%;  position: fixed; background-color: wheat;">
-        <div style="width:30%; float:left; text-align: center">
-            <input type="button" class="btn btn-default"  style="width: 180px" ng-click="Cancel()" value="Cancel">
+        <div style="width:30%; text-align: center">
+            <input type="button" class="btn btn-default" style="width: 180px" ng-click="Cancel()"
+                   value="Cancel">
         </div>
-        <div style="width:30%; float:left; text-align: center">
-            <input type="button" class="btn btn-default"  style="width: 180px" ng-click="ManualBuyMode()" value="Manual buy mode">
+        <div style="width:30%; float:right; text-align: center">
+            <input type="button" class="btn btn-default" style="width: 180px" ng-click="ManualBuyMode()"
+                   value="Manual buy mode">
         </div>
     </div>
 </div>
+</div>
+

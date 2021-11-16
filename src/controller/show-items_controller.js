@@ -34,8 +34,6 @@ App.controller('ShowItemsController', function ($http, $scope, AuthService, Card
     }
 
     $scope.addItem = function (item) {
-
-
         CardService.data.selectedItems.push(item);
 
         CardService.data.totalPrice = 0.00;

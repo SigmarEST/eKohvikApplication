@@ -1,4 +1,7 @@
-App.controller('AutomaticCoffeeController', function ($http, $scope, AuthService, CardService, $timeout, $state, $rootScope) {
+const spawn = require("child_process").spawn;
+
+App.controller('AutomaticCoffeeController', function ($http, $scope, AuthService, CardService,
+                                                      $timeout, $state, $rootScope) {
     $scope.userName = null;
     $scope.userBalance = null;
 
@@ -6,6 +9,9 @@ App.controller('AutomaticCoffeeController', function ($http, $scope, AuthService
     $scope.userBalance = CardService.data.customer.balance;
     $scope.selectedItem = CardService.data.selectedItems;
     $scope.totalPrice = CardService.data.totalPrice;
+    $scope.loaderMessage = 'Initializing Coffee Machine reading'
+    $scope.sampleData = null;
+    $scope.feedbackMode = false;
 
     var init = function () {
         $http.get(URL + '/item/coffeeMachineItems/')
@@ -24,6 +30,21 @@ App.controller('AutomaticCoffeeController', function ($http, $scope, AuthService
                     CardService.data.errorMessage = "Item retrieving got error"
                     $state.go('error')
                 });
+
+        initPythonAccelerationDataCollection();
+    }
+
+    function initPythonAccelerationDataCollection() {
+        const pythonProcess = spawn('python', ["././script.py"]);
+
+        $scope.loaderMessage = 'Waiting for Coffee Machine to finish'
+
+        pythonProcess.stdout.on('data', (data) => {
+            $scope.loaderMessage = 'Detecting product'
+            // TODO Tuvastamise kutsumine?
+            // TODO -> KUI EI LEIA SIIS KÜSIDA KASUTAJALT JA SAATA BACKENDI*/
+            $state.go('coffee-feedback')
+        });
     }
 
     /*
@@ -50,10 +71,6 @@ App.controller('AutomaticCoffeeController', function ($http, $scope, AuthService
     $scope.showPurchases = function(){
         $state.go('show-purchases')
     }*/
-
-    $scope.startAccelerationListening = function () {
-
-    }
 
     $scope.ManualBuyMode = function () {
         $state.go("show-items")

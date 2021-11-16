@@ -1,0 +1,32 @@
+<div ng-controller="CoffeeFeedbackController" id="PageItems" class="page" style="background-color: wheat">
+    <div style="height:10vh; width: 100%; border-bottom: 1px solid black; position: fixed; background-color: wheat; display:inline-block"
+         id="itemsHeader">
+        <div style="width:30%; float:left; text-align: center">
+            <h4 style="padding:6px; margin:0" ng-model="userName" id="userName">{{userName}}</h4>
+        </div>
+        <div style="width:30%; float:left; text-align: center">
+            <h4 style="padding:6px; margin:0" ng-model="userBalance" id="userBalance">{{(userBalance).toFixed(2)}}</h4>
+        </div>
+    </div>
+
+    <div style="height:10vh; margin-top: 10vh; width: 100%; text-align: center; display: inline-block">
+        <h1>Sorry, we could not find the product.</h1>
+        <h3>Could you help us train the system and choose which product did you order?</h3>
+    </div>
+    <div style="height:50vh; margin-top: 10vh; width: 100%; text-align: center; display: inline-block">
+        <div ng-repeat="u in machineItems">
+            <input type="button" class="btn btn-default" style="width: 80%; margin: auto;"
+                   ng-click="sendFeedback(u.itemId)" value="{{u.name}}">
+        </div>
+    </div>
+
+    <div style="height:10vh;  width: 100%;  position: fixed; background-color: wheat;">
+        <div style="width:30%; text-align: center">
+            <input type="button" class="btn btn-default" style="width: 180px" ng-click="Cancel()" value="Cancel">
+        </div>
+        <div style="width:30%; float:right; text-align: center">
+            <input type="button" class="btn btn-default" style="width: 180px" ng-click="ManualBuyMode()"
+                   value="Manual buy mode">
+        </div>
+    </div>
+</div>

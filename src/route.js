@@ -73,6 +73,17 @@ App.config(function ($stateProvider) {
                 controller: 'AutomaticCoffeeController',
             }
         }
+    }).state('coffee-feedback', {
+        url: '/coffee-feedback',
+        data: {
+            role: 'USER'
+        },
+        views: {
+            'content@': {
+                templateUrl: 'src/views/coffeeFeedbackPage.html',
+                controller: 'CoffeeFeedbackController',
+            }
+        }
     }).state('home', {
         url: '/',
         views: {

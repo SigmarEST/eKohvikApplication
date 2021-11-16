@@ -10,7 +10,7 @@
     "build": "electron-packager . eKohvik --platform=linux --arch=ARM",
     "rebuild": "electron-rebuild -f -w pcsclite"
   },
-  "author": "Khasanboy Akbarov",
+  "author": "Khasanboy Akbarov & Sigmar Ukrainski",
   "license": "ISC",
   "dependencies": {
     "js-sha512": "^0.3.0",
